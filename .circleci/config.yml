@@ -7,17 +7,29 @@ orbs:
 # Orchestrate or schedule a set of jobs
 
 jobs:
-  print_hello:
+  print_greetings:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo HELLO
-  print_world:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
       - run: echo WORLD
       - run: echo $_env_name
+  upload_file:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "THIS IS A SAMPLE TEXT" > ~/output.txt  
+      - persist_to_workspace:
+          root: ~
+          paths: 
+            - output.txt  
+  download_file:
+    docker:
+      - image: alpine:latest
+    steps:
+      - attach_workspace:
+          at: ~
+      - run: cat output.txt  
 
 workflows:
   # Name the workflow "welcome"
@@ -25,5 +37,8 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
-      - print_hello
-      - print_world
+      - print_greetings
+      - upload_file
+      - download_file
+          requires:
+            - upload_file
