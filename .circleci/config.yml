@@ -11,3 +11,17 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+      - print_hello
+      - print_world
+
+job:
+  print_hello:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo HELLO
+  print_world:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo WORLD
