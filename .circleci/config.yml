@@ -39,6 +39,6 @@ workflows:
       - welcome/run
       - print_greetings
       - upload_file
-      - download_file
+      - download_file:
           requires:
             - upload_file
