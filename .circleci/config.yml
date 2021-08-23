@@ -20,7 +20,7 @@ jobs:
     steps:
       - run: echo "THIS IS A SAMPLE TEXT" > ~/output.txt  
       - persist_to_workspace:
-          root: ~
+          root: ~/
           paths: 
             - output.txt  
   download_file:
@@ -28,7 +28,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: ~
+          at: ~/
       - run: cat output.txt  
 
 workflows:
