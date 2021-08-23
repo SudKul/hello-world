@@ -16,7 +16,7 @@ jobs:
       - run: echo $_env_name
   upload_file:
     docker:
-      - image: alpine:latest
+      - image: circleci/node:13.8.0
     steps:
       - run: echo "THIS IS A SAMPLE TEXT" > ~/output.txt  
       - persist_to_workspace:
@@ -25,7 +25,7 @@ jobs:
             - output.txt  
   download_file:
     docker:
-      - image: alpine:latest
+      - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
           at: ~
