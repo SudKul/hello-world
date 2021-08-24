@@ -1,6 +1,6 @@
 ---
 # Exercise: Define Ansible Playbook
 - name: Exercise 
-  hosts: []
+  hosts: localhost
   roles:
    - print
