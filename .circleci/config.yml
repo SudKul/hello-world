@@ -60,7 +60,7 @@ workflows:
   my_workflow:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
+      # - welcome/run
       - print_greetings
       - upload_file
       - download_file:
