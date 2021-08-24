@@ -34,6 +34,7 @@ jobs:
       - run: echo HELLO
       - run: echo WORLD
       - run: echo $_env_name
+
   upload_file:
     docker:
       - image: circleci/node:13.8.0
@@ -43,6 +44,7 @@ jobs:
           root: ~/
           paths: 
             - output.txt  
+            
   download_file:
     docker:
       - image: circleci/node:13.8.0
@@ -64,7 +66,7 @@ jobs:
               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
               --region us-east-1
       - run: return 1
-      - destroy_environment:
+      - destroy_environment
           when: on_fail
 
   configure_infrastructure: 
