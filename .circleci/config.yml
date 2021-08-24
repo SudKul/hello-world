@@ -54,6 +54,22 @@ jobs:
               --template-file template.yml \
               --stack-name my-stack \
               --region us-east-1
+  configure_infrastructure: 
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["06:7c:db:71:49:2f:03:36:60:08:d2:fd:33:6f:17:d3"] # You can get this ID in the section where you registered the SSH Key
+      - run:
+          name: Install dependencies
+          command: |
+            # install the dependencies needed for your playbook
+            apk add --update ansible 
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory.txt main4.yml    
 
 workflows:
   # Name the workflow "welcome"
@@ -67,3 +83,4 @@ workflows:
           requires:
             - upload_file
       - create_infrastructure
+      - configure_infrastructure

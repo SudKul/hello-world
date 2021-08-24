@@ -1,7 +1,8 @@
 ---
 # Exercise for setting up a web server in an EC
 - name: Exercise for setting up a web server in an EC 
-  hosts: ubuntu
+  # hosts: ubuntu
+  hosts: 54.146.95.203
   user: ubuntu
   become: true
   become_method: sudo
