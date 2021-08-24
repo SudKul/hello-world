@@ -6,7 +6,6 @@
   become: true
   become_method: sudo
   become_user: root
-  become_ask_pass: true
   roles:
    - prepare
    - apache
