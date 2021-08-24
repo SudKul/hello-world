@@ -15,6 +15,15 @@ commands:
     steps:
       - run: echo << parameters.id >>
 
+  destroy_environment:
+    steps:
+      - run:
+          name: Destroy environment
+          # CIRCLE_WORKFLOW_ID is a Built-in environment variable 
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+
+
 jobs:
   print_greetings:
     docker:
@@ -48,12 +57,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Ensure backend infrastructure exist
+          name: Create  Cloudformation Stack
           command: |
             aws cloudformation deploy \
               --template-file template.yml \
-              --stack-name my-stack \
+              --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
               --region us-east-1
+      - run: return 1
+      - destroy_environment
+        when: on_fail
+
   configure_infrastructure: 
     docker:
       - image: python:3.7-alpine3.11
