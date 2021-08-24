@@ -2,6 +2,7 @@
 # Exercise for setting up a web server in an EC
 - name: Exercise for setting up a web server in an EC 
   # hosts: ubuntu
+  # Use the public IP if the VM is already created
   hosts: 54.146.95.203
   user: ubuntu
   become: true
