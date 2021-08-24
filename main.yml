@@ -1,5 +1,7 @@
 ---
-- name: Exercise #1
+# Exercise for setting up a web server in an EC
+- name: Exercise for setting up a web server in an EC 
   hosts: ubuntu
+  user: ubuntu
   roles:
    - setup
