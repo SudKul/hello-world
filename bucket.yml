@@ -6,7 +6,7 @@ Parameters:
     Default: mybucket644752792305
 
 Resources:
-  WebsiteBucket:s
+  WebsiteBuckets
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "${MyBucketName}"
