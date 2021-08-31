@@ -1,7 +1,7 @@
 Parameters:
   # Existing Bucket name
   PipelineID:
-    Description: Unique identifier.
+    Description: Existing Bucket name
     Type: String
 
 Resources:
