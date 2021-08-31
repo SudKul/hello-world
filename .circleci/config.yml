@@ -204,7 +204,6 @@ workflows:
       - download_file:
           requires:
             - upload_file
-      - my_job
       - create_infrastructure
       - configure_infrastructure
       - create_and_deploy_front_end
