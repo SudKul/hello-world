@@ -61,18 +61,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: cat ~/output.txt
-  
-  # Exercise: Job Failures
-  my_job:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: exit 1
-      - run:
-          name: on error
-          command: echo "Hello Error!"
-          when: on_fail 
+      - run: cat ~/output.txt 
  
   # Exercise: Infrastructure Creation
   # Exercise - Rollback
