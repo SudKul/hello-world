@@ -37,6 +37,9 @@ Here is the list of files and corresponding exercises.
     └── config.yml          ### CircleCI exercises
 ```
 
+> **Note**: When you attempt any CircleCI exercise, you should comment out the Jobs and Workflows from other exercises. This will ensure that you do not end up creating unnecessary EC2, S3, CloudFront resources in your AWS console. 
+
+
 ### 1. Exercise: Define Ansible Playbook
 Files relevant for this exercise are:
 ```bash
