@@ -145,14 +145,14 @@ jobs:
   
   # Exercise: Promote to Production
   # Job 2
-  # Fetch and save the pipeline/deployment ID responsible for the last release.
+  # Fetch and save the pipeline ID (bucket name) responsible for the last release.
   get_last_deployment_id:
     docker:
       - image: amazon/aws-cli
     steps:
       - checkout
       - run:
-          name: Fetch and save the pipeline ID was responsible for the last successful production release.
+          name: Fetch and save the pipeline ID (bucket name) was responsible for the last release.
           command: |
             aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
@@ -186,8 +186,8 @@ jobs:
       - run:
           name: Destroy the previous production version's S3 bucket and CloudFormation stack. 
           command: |
-            aws s3 rm "s3://${OldPipelineID}" --recursive
-            aws cloudformation delete-stack --stack-name "${PreviousPipelineID}" 
+            aws s3 rm s3://mybucket644752792305 --recursive
+            aws cloudformation delete-stack --stack-name production-distro 
 
 workflows:
   # Name the workflow "welcome"

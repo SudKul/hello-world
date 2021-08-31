@@ -2,11 +2,10 @@ Parameters:
   # New Bucket name
   MyBucketName:
     Type: String
-    # Lowercase and unique name
     Default: mybucket644752792305
 
 Resources:
-  WebsiteBuckets
+  WebsiteBuckets:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "${MyBucketName}"
