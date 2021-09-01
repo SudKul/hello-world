@@ -203,6 +203,9 @@ jobs:
             cat ~/textfile.txt
             export OldBucketID=$(cat ~/textfile.txt)
             echo $OldBucketID
+            echo "s3://${OldBucketID}"
+            echo s3://${OldBucketID}
+            echo s3://"${OldBucketID}"
       - run:
           name: Destroy the previous production version's S3 bucket and CloudFormation stack. 
           # Use $OldBucketID environment variable or mybucket644752792305 below.
