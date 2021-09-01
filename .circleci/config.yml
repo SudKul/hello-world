@@ -163,11 +163,11 @@ jobs:
           command: |
             aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-            --no-paginate --output text > ~/OldBucketID.txt
+            --no-paginate --output text > ~/textfile.txt
       - persist_to_workspace:
           root: ~/
           paths: 
-            - OldBucketID.txt 
+            - textfile.txt 
   
   # Exercise: Promote to Production - Job 3
   # Executes the cloudfront.yml template that will modify the existing CloudFront Distribution, change its target from the old bucket to the new bucket - `mybucket-${CIRCLE_WORKFLOW_ID:0:7}`. 
@@ -196,16 +196,16 @@ jobs:
       - attach_workspace:
           at: ~/
       # $OldBucketID is `mybucket644752792305` in this example
-      - run: cat ~/OldBucketID.txt | export OldBucketID
+      - run: export OldBucketID=$(cat ~/textfile.txt)
       - run:
           name: Destroy the previous production version's S3 bucket and CloudFormation stack. 
           # Use $OldPipelineID or $OldBucketID environment variable or mybucket644752792305 below
           # Similarly, you can create and use $OldStackID environment variable in place of production-distro 
           command: |
             aws s3 rm s3://$OldBucketID --recursive
-            aws cloudformation delete-stack --stack-name production-distro 
-            aws cloudformation delete-stack --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7}
-            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+          #  aws cloudformation delete-stack --stack-name production-distro 
+          #  aws cloudformation delete-stack --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7}
+          #  aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 
 
 
@@ -226,4 +226,6 @@ workflows:
       - promote_to_production:
           requires: 
             - create_and_deploy_front_end
-      - clean_up_old_front_end
+      - clean_up_old_front_end:
+          requires:
+            - promote_to_production
