@@ -204,7 +204,7 @@ jobs:
           # Use $OldPipelineID or $OldBucketID environment variable or mybucket644752792305 below
           # Similarly, you can create and use $OldStackID environment variable in place of production-distro 
           command: |
-            aws s3 rm "s3://$OldBucketID" --recursive
+            aws s3 rm "s3://${OldBucketID}" --recursive
           #  aws cloudformation delete-stack --stack-name production-distro 
           #  aws cloudformation delete-stack --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7}
           #  aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
