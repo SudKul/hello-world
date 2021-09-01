@@ -192,6 +192,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run: yum install -y tar gzip
       - attach_workspace:
           at: ~/
       # $OldBucketID is `mybucket644752792305` in this example
