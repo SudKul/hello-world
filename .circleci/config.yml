@@ -198,8 +198,8 @@ jobs:
           at: ~/
       # $OldBucketID is `mybucket644752792305` in this example
       - run: 
-        name: Create Environment Variables 
-        command: |
+          name: Create Environment Variables 
+          command: |
             cat ~/textfile.txt
             export OldBucketID=$(cat ~/textfile.txt)
             echo $OldBucketID
