@@ -163,11 +163,11 @@ jobs:
           command: |
             aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-            --no-paginate --output text > ~/output.txt
+            --no-paginate --output text > ~/OldBucketID.txt
       - persist_to_workspace:
           root: ~/
           paths: 
-            - output.txt 
+            - OldBucketID.txt 
   
   # Exercise: Promote to Production - Job 3
   # Executes the cloudfront.yml template that will modify the existing CloudFront Distribution, change its target from the old bucket to the new bucket - `mybucket-${CIRCLE_WORKFLOW_ID:0:7}`. 
@@ -196,7 +196,7 @@ jobs:
       - attach_workspace:
           at: ~/
       # $OldBucketID is `mybucket644752792305` in this example
-      - run: cat ~/output.txt | export OldBucketID
+      - run: cat ~/OldBucketID.txt | export OldBucketID
       - run:
           name: Destroy the previous production version's S3 bucket and CloudFormation stack. 
           # Use $OldPipelineID or $OldBucketID environment variable or mybucket644752792305 below
