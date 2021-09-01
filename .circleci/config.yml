@@ -196,7 +196,7 @@ jobs:
       - attach_workspace:
           at: ~/
       # $OldBucketID is `mybucket644752792305` in this example
-      - run: export OldBucketID=cat ~/output.txt
+      - run: cat ~/output.txt | export OldBucketID
       - run:
           name: Destroy the previous production version's S3 bucket and CloudFormation stack. 
           # Use $OldPipelineID or $OldBucketID environment variable or mybucket644752792305 below
