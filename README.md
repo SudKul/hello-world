@@ -1,4 +1,4 @@
-# hello-world
+# hello-world app
 
 Here is the list of files and corresponding exercises. 
 ```bash
